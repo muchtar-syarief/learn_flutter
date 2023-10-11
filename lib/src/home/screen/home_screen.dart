@@ -1,5 +1,9 @@
-import 'package:case_study/src/widget/tab/tab_bar.dart';
+import 'package:case_study/src/home/widgets/nearby.dart';
+import 'package:case_study/src/home/widgets/popular.dart';
+import 'package:case_study/src/home/widgets/suggest.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/campaign.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -87,112 +91,141 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
-      ),
-      child: Column(
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              InkWell(
-                onTap: () {},
-                child: Image.asset(
-                  'assets/icons/bell.png',
-                ),
-              ),
-              InkWell(
-                onTap: () {},
-                child: const Column(
-                  children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24,
+            vertical: 20,
+          ),
+          child: Column(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () {},
+                    child: Image.asset(
+                      'assets/icons/bell.png',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: const Column(
                       children: <Widget>[
-                        Icon(
-                          Icons.location_on_outlined,
-                          size: 16,
-                          weight: 700,
-                          color: Color.fromRGBO(255, 157, 1, 1),
-                        ),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            Text(
-                              'Home',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w900,
-                              ),
-                            ),
                             Icon(
-                              Icons.keyboard_arrow_down,
+                              Icons.location_on_outlined,
                               size: 16,
+                              weight: 700,
+                              color: Color.fromRGBO(255, 157, 1, 1),
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  'Home',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                                Icon(
+                                  Icons.keyboard_arrow_down,
+                                  size: 16,
+                                ),
+                              ],
                             ),
                           ],
                         ),
+                        Text(
+                          '9, suramya duplex, nr. nigam bus stand.....',
+                        ),
                       ],
                     ),
-                    Text(
-                      '9, suramya duplex, nr. nigam bus stand.....',
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: const Icon(
+                      Icons.favorite_border,
+                      color: Color.fromRGBO(218, 218, 218, 1),
                     ),
-                  ],
-                ),
+                  )
+                ],
               ),
-              InkWell(
-                onTap: () {},
-                child: const Icon(
-                  Icons.favorite_border,
-                  color: Color.fromRGBO(218, 218, 218, 1),
+              const SizedBox(
+                height: 24,
+              ),
+              Container(
+                height: 52,
+                color: Colors.grey[100],
+                alignment: Alignment.center,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: TextField(
+                        textAlignVertical: TextAlignVertical.center,
+                        decoration: InputDecoration(
+                          hintText: 'Search Food',
+                          prefixIcon: Image.asset(
+                            'assets/icons/search.png',
+                          ),
+                          border: InputBorder.none,
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(12),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Image.asset('assets/icons/slider.png'),
+                      ),
+                    )
+                  ],
                 ),
               )
             ],
           ),
-          const SizedBox(
-            height: 36,
-          ),
-          const Campaign(),
-        ],
-      ),
-    );
-  }
-}
-
-class Campaign extends StatelessWidget {
-  const Campaign({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 208,
-      child: Stack(
-        children: [
-          Image.asset(
-            'assets/images/indian-condiments-with-copy-space.png',
-          ),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-                'OFFER',
-                style: TextStyle(
-                  fontSize: 64,
-                  foreground: Paint()
-                    ..shader = const LinearGradient(
-                      colors: <Color>[
-                        Color.fromRGBO(255, 157, 1, 1),
-                        Color.fromRGBO(42, 41, 46, 0),
-                      ],
-                    ).createShader(
-                      Rect.fromLTWH(0.5, 0, 50, 0),
-                    ),
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 24,
+                  ),
+                  child: Campaign(),
                 ),
-              )
-          )
-        ],
-      ),
+                const SizedBox(
+                  height: 36,
+                ),
+                Suggest(),
+                const SizedBox(
+                  height: 36,
+                ),
+                Popular(),
+                const SizedBox(
+                  height: 36,
+                ),
+                Nearby(),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
